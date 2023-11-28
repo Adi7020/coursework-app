@@ -22,10 +22,7 @@ class PostFactory extends Factory
         return [
             //
             'user_id' => $user_id,
-            'title' => fake()->sentence(),
             'post' => fake()->paragraph()
-
-
         ];
     }
 }
