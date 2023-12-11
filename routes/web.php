@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -19,7 +20,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/posts',[PostController::class,'index']);
+Route::get('/posts',[PostController::class,'index'])->name('postindex');
+
+Route::get('/comments',[CommentController::class,'index'])->name('commentindex');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

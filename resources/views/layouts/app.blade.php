@@ -29,7 +29,8 @@
 
             <!-- Page Content -->
             <main>
-                @yield('Posts')    
+                @yield('Posts')
+                @yield('Comments')    
                 
             </main>
         </div>
