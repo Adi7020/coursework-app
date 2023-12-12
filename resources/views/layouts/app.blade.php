@@ -29,9 +29,8 @@
 
             <!-- Page Content -->
             <main>
-                @yield('Posts')
-                @yield('Comments')    
-                
+                {{$slot}}
+                  
             </main>
         </div>
     </body>
