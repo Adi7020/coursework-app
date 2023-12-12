@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
-class PostController extends Controller
+class NewPostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,9 +13,8 @@ class PostController extends Controller
     public function index()
     {
         //
-        $posts = Post::all();
-        $posts = Post:: orderBy('created_at','DESC')->paginate(8);
-        return view('Posts.index',compact('posts'));
+        $pos = Post::all();
+        return view('dashboard',['pos'=>$pos]);
     }
 
     /**

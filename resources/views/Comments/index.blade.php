@@ -5,10 +5,10 @@
         </h2>
     </x-slot>
 
-
-<div class="text-white pt-6">
+@section('content')
+    <div class="text-white pt-6">
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 ">
-        @foreach ($comments as $comment)
+        @foreach (Auth::user()->comments as $comment)
         <div class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <div class="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 ">
                 {{$comment->comment}}
@@ -26,8 +26,7 @@
         
     </div>
 </div>
+@endsection
 
-    
-@section('Comments')@endsection
 
 </x-app-layout>
