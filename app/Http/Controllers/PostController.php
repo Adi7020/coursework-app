@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
@@ -14,8 +15,8 @@ class PostController extends Controller
     {
         //
         $posts = Post::all();
-        $posts = Post:: orderBy('created_at','DESC')->paginate(8);
-        return view('Posts.index',compact('posts'));
+        
+        return view('Posts.index',['posts'=>$posts]);
     }
 
     /**
@@ -32,6 +33,14 @@ class PostController extends Controller
     public function store(Request $request)
     {
         //
+        $post = new Post();
+        $post->user_id = Auth::user()->id;
+        $post->post = $request->post;
+        $post->save();
+
+        return redirect()->route('dashboard')->with('success','Post added successfully');
+
+        
     }
 
     /**

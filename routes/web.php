@@ -21,11 +21,15 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/posts',[PostController::class,'index'])->name('postindex');
+Route::get('/posts/{post}',[PostController::class,'index'])->name('post.index');
 
-Route::get('/comments',[CommentController::class,'index'])->name('commentindex');
+Route::get('/comments/{comment}',[CommentController::class,'index'])->name('comment.index');
 
 Route::get('/dashboard',[NewPostController::class, 'index'] )->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::post('/posts',[PostController::class,'store'])->name('post.create');
+
+Route::get('/posts/{post}/comments',[CommentController::class,'index'])->name('post.comment.create');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

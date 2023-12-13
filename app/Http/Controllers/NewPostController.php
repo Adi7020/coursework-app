@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class NewPostController extends Controller
 {
@@ -14,6 +15,7 @@ class NewPostController extends Controller
     {
         //
         $pos = Post::all();
+        $pos = Post::orderBy('created_at','DESC')->paginate(5);
         return view('dashboard',['pos'=>$pos]);
     }
 
@@ -31,6 +33,7 @@ class NewPostController extends Controller
     public function store(Request $request)
     {
         //
+        
     }
 
     /**
