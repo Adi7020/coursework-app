@@ -41,21 +41,36 @@ class CommentController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
+        $validateData = $request->validate([
             'comment' => 'required|string',
-            
+            'user_id' => 'required|max:191',
+            'post_id' => 'required|max:191',
         ]);
 
-        // Create a new comment
-        $comment = new Comment([
-            'comment' => $request->input('comment'),
-        ]);
+        if (!$validateData) {
+            return response()->json([
+                'status' => 400,
+                'errors' => "Something went wrong",
+            ]);
+        } else {
 
-        // Save the comment
-        $comment->save();
+                // Create a new comment
+                $comment = new Comment;
+
+                $comment->comment = $request->input('comment');
+                $comment->user_id = $request->input('user_id');
+                $comment->post_id = $request->input('post_id');
+                // Save the comment
+                $comment->save();
+
+                return response()->json([
+                    'status'=> 200,
+                    'errors'=>"Comment added successfully",
+                ]);
+        }
 
         // Redirect or respond as needed
-        return response()->json(['message'=>'Comment Added successfully']);
+        //return response()->json(['message'=>'Comment Added successfully']);
     }
 
 
@@ -94,6 +109,7 @@ class CommentController extends Controller
 
         $comments = Comment::all();
         return view('Comments.index',['comments' => $comments]);
+        
     }
 
     /**

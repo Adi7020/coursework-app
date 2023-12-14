@@ -21,22 +21,19 @@
                     <div class="col-md-7">
                         {{$post->user->tags->nametag}}
                     </div>
-                    <div class="col">
-                        @auth()
-                        @if (Auth::id() === $post->user->id)
-                        <a href="{{ route('posts.edit', ['id' => $post->id]) }}" class="link-muted "><i
-                                class="fas fa-pencil-alt ms-2"></i></a>
-                        @endif
-                        @endauth
-                    </div>
+                    
                 </div>
             </div>
 
             <div class="mt-3 p-6 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                {{$post->post}}
-                <div>
-                    <img src="{{ asset('uploads/' . $post->image) }}" alt="...">
+                <div class = "mb-3">
+                        {{ $post->post }}
                 </div>
+                @if($post->image)
+                <div class = "rounded mx-auto d-block ">
+                    <img src="{{ asset('uploads/' . $post->image) }}" class="img-fluid rounded" alt="...">
+                </div>
+                @endif
             </div>
             <div class="text-bottom pt-6 flex items-center justify-between ">
 
@@ -57,8 +54,7 @@
                 class=" mt-4 p-6 border border-gray-200 rounded-lg shadow dark:bg-gray-900 dark:border-gray-700 text-white">
                 <div class="mt-4 ">
                     @foreach ($post->comments as $comment)
-                    <div
-                        class="mt-2 mb-4 p-6 border border-gray-200 rounded-lg shadow dark:bg-gray-500 dark:border-gray-700">
+                    <div class="mt-2 mb-4 p-6 border border-gray-200 rounded-lg shadow dark:bg-gray-500 dark:border-gray-700">
                         <div class="container mt-1">
                             <div class="row g-3 mb-4">
                                 <div class="col-md-2">
@@ -77,8 +73,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div
-                            class=" p-6 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        <div class=" p-6 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                             {{ $comment->comment }}
                         </div>
                     </div>

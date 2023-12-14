@@ -33,7 +33,9 @@ Route::get('/dashboard', function () {
 // Route::post('/posts',[PostController::class,'store'])->name('post.create');
 Route::post('/posts',[PostController::class,'store'])->name('post.store');
 
-Route::post('/posts/{post}/comments',[CommentController::class,'index'])->name('post.comment.create');
+// Route::post('/posts/{post}/comments',[CommentController::class,'index'])->name('post.comment.create');
+
+Route::match(['get', 'post'], '/comments/{id}', [CommentController::class, 'index'])->name('comment.index');
 
 Route::get('/posts/{id}/edit',[PostController::class,'edit'])->name('posts.edit');
 
@@ -41,9 +43,9 @@ Route::put('/posts/{id}', [PostController::class, 'update'])->name('posts.update
 
 Route::get('/comments/{comment}/edit',[CommentController::class,'edit'])->name('comments.edit');
 
-Route::put('/comments/{id}', [CommentController::class, 'update'])->name('comments.update');
+// Route::put('/comments/{id}', [CommentController::class, 'update'])->name('comments.update');
 
-Route::post('/comments',[CommentController::class,'store'])->name('comment.store');
+Route::post('/comments',[CommentController::class,'store'])->name('comments.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -28,7 +28,7 @@
                                 <div class="col">
                                     @auth()
                                     @if (Auth::id() === $post->user->id)
-                                        <a href="{{ route('posts.edit', ['id' => $post->id]) }}" class="link-muted "><i class="fas fa-pencil-alt ms-2"></i></a>
+                                        <a href="{{ route('posts.edit', ['id' => $post->id]) }}" class="link-muted ">Edit</a>
                                     @endif   
                                     @endauth
                                 </div>
@@ -36,23 +36,29 @@
                         </div>
                         
                     <div class="mt-3 p-6 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-    {{ $post->post }}
-    <div class="w-2/5">
-        <img src="{{ asset('uploads/' . $post->image) }}" alt="...">
-    </div>
-</div>
+                        
+                        <div class = "mb-3">
+                            {{ $post->post }}
+                        </div>
+                        @if ($post->image)
+                            <div class="rounded mx-auto d-block">
+                                <img src="{{ asset('uploads/' . $post->image) }}" class="img-fluid rounded" alt="...">
+                            </div>
+                         @endif
+    
+                    </div>
 
                     <div class="text-bottom pt-6 flex items-center justify-between ">
                         
-                        <div class="small d-flex justify-content-start">
-              <a href="#!" class="d-flex align-items-center me-3">
-                <i class="far fa-thumbs-up me-2"></i>
-                <p class="mb-0">Like</p>
-              </a>
-              <a href="{{ route('comment.index', ['id' => $post->id]) }}" class="d-flex align-items-center me-3">
-    <i class="far fa-comment-dots me-2 "></i>
-    <p class="mb-0">Comment</p>
-</a>   
+                    <div class="small d-flex justify-content-start">
+                    <a href="#!" class="d-flex align-items-center me-3">
+                        <i class="far fa-thumbs-up me-2"></i>
+                        <p class="mb-0">Like</p>
+                    </a>
+                    <a href="{{ route('comment.index', ['id' => $post->id]) }}" class="d-flex align-items-center me-3">
+                    <i class="far fa-comment-dots me-2 "></i>
+                    <p class="mb-0">Comment</p>
+                </a>   
             </div>
                        {{$post->created_at->format('Y-m-d')}}
                     </div>
