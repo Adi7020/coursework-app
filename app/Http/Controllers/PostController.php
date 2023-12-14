@@ -38,12 +38,17 @@ class PostController extends Controller
             'post' =>'required',
             'image'=>'required|image|mimes:png,jpg,png,gif,svg',
         ]);
-        $imagePath = $request->file('image')->store('uploads','public');
 
         $post = new Post();
         $post->user_id = Auth::user()->id;
         $post->post = $request->post;
-        $post->image = $imagePath;
+
+        $image = $request->image;
+        if($image){
+            $imagename = time().'.'.$request->image->getClientOriginalExtension();
+            $request->image->move('uploads', $imagename);
+            $post->image = $imagename;
+        }
         $post->save();
 
         return redirect()->back();

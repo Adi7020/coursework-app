@@ -8,6 +8,7 @@
     @section('content')
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid justify-items-center text-white">
 
+        
 
         <div
             class="m-8 p-6 bg-gray-500 border border-gray-200 rounded-lg shadow dark:bg-gray-500 dark:border-gray-700 w-4/5">
@@ -34,7 +35,7 @@
             <div class="mt-3 p-6 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
                 {{$post->post}}
                 <div>
-                    <img src="{{$post->image}}" alt="...">
+                    <img src="{{ asset('uploads/' . $post->image) }}" alt="...">
                 </div>
             </div>
             <div class="text-bottom pt-6 flex items-center justify-between ">

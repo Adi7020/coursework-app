@@ -11,20 +11,21 @@ class CommentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    // public function index()
-    // {
-    //     //
-    //     $posts = Post::all();
-    //     $comments = Comment::all();
-    //     return view('Comments.index',['comments' => $comments,'posts'=> $posts]);
-    // }
-    // CommentController.php
+    
 
-public function index($postId)
-{
-    $post = Post::with('comments.user.tags')->findOrFail($postId);
-    return view('Comments.index', ['post' => $post]);
-}
+    public function index($postId)
+    {
+        //
+        
+        // $post = Post::with('comments.user.tags')->findOrFail($postId);
+        // $comments = $post->comments;
+        // return view('Comments.index', ['post' => $post,'comments' => $comments]);
+
+        $post = Post::findOrFail($postId);
+        $comments = $post->comments;
+
+        return view('Comments.index', compact('comments', 'post'));
+    }
 
 
     /**
@@ -40,8 +41,23 @@ public function index($postId)
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'comment' => 'required|string',
+            
+        ]);
+
+        // Create a new comment
+        $comment = new Comment([
+            'comment' => $request->input('comment'),
+        ]);
+
+        // Save the comment
+        $comment->save();
+
+        // Redirect or respond as needed
+        return response()->json(['message'=>'Comment Added successfully']);
     }
+
 
     /**
      * Display the specified resource.
@@ -57,8 +73,7 @@ public function index($postId)
     public function edit(string $id)
     {
         //
-        $comment = Comment::findOrFail($id);
-        
+        $comment = Comment::findOrFail($id); 
         return view('Comments.edit', compact('comment'));
     }
 

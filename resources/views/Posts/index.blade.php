@@ -36,11 +36,12 @@
                         </div>
                         
                     <div class="mt-3 p-6 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
-                        {{$post->post}}
-                        <div>
-                                <img src="{{$post->image}}" alt="..."> 
-                        </div>
-                    </div>
+    {{ $post->post }}
+    <div class="w-2/5">
+        <img src="{{ asset('uploads/' . $post->image) }}" alt="...">
+    </div>
+</div>
+
                     <div class="text-bottom pt-6 flex items-center justify-between ">
                         
                         <div class="small d-flex justify-content-start">
@@ -48,13 +49,10 @@
                 <i class="far fa-thumbs-up me-2"></i>
                 <p class="mb-0">Like</p>
               </a>
-              <a href="{{ route('comment.index', ['post' => $post->id]) }}" class="d-flex align-items-center me-3">
+              <a href="{{ route('comment.index', ['id' => $post->id]) }}" class="d-flex align-items-center me-3">
     <i class="far fa-comment-dots me-2 "></i>
     <p class="mb-0">Comment</p>
-</a>
-
-              
-              
+</a>   
             </div>
                        {{$post->created_at->format('Y-m-d')}}
                     </div>
