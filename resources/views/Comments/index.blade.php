@@ -10,7 +10,7 @@
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4 ">
                 @foreach (Auth::user()->comments as $comment)
                 
-                    <div class="block max-w-sm p-6  border border-gray-200 rounded-lg shadow dark:bg-gray-400 dark:border-gray-700">
+                    <div class="block max-w-sm p-6  border border-gray-200 rounded-lg shadow dark:bg-gray-500 dark:border-gray-700">
                         <div class="container mt-1">
                             <div class="row g-3 mb-4">
                                 <div class="col-md-2">
@@ -20,7 +20,12 @@
                                     {{$comment->user->tags->nametag}}
                                 </div>
                                 <div class="col">
-                                    <a href="#!" class="link-muted "><i class="fas fa-pencil-alt ms-2"></i></a>
+                                    @auth()
+                                    @if (Auth::id() === $comment->user->id)
+                                        <a href="{{route('comment.edit',$comment->user->id)}}" class="link-muted "><i class="fas fa-pencil-alt ms-2"></i></a>
+                                    @endif   
+                                    @endauth
+                                    
                                 </div>
                             </div>
                         </div>

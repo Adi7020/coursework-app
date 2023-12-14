@@ -15,6 +15,8 @@ class PostController extends Controller
     {
         //
         $posts = Post::all();
+        $posts = Post::orderBy('created_at','DESC')->paginate(5);
+        
         
         return view('Posts.index',['posts'=>$posts]);
     }
@@ -32,13 +34,19 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'post' =>'required',
+            'image'=>'required|image|mimes:png,jpg,png,gif,svg',
+        ]);
+        $imagePath = $request->file('image')->store('uploads','public');
+
         $post = new Post();
         $post->user_id = Auth::user()->id;
         $post->post = $request->post;
+         $post->image = $imagePath;
         $post->save();
 
-        return redirect()->route('dashboard')->with('success','Post added successfully');
+        return redirect()->route('dashboard');
 
         
     }
@@ -49,6 +57,7 @@ class PostController extends Controller
     public function show(string $id)
     {
         //
+        
     }
 
     /**
@@ -57,6 +66,8 @@ class PostController extends Controller
     public function edit(string $id)
     {
         //
+        $editing = true;
+        return view('post.edit',compact('posts','editing'));
     }
 
     /**

@@ -25,11 +25,18 @@ Route::get('/posts/{post}',[PostController::class,'index'])->name('post.index');
 
 Route::get('/comments/{comment}',[CommentController::class,'index'])->name('comment.index');
 
-Route::get('/dashboard',[NewPostController::class, 'index'] )->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::post('/posts',[PostController::class,'store'])->name('post.create');
+// Route::post('/posts',[PostController::class,'store'])->name('post.create');
+Route::post('/posts',[PostController::class,'store'])->name('post.store');
 
 Route::get('/posts/{post}/comments',[CommentController::class,'index'])->name('post.comment.create');
+
+Route::get('/posts/{post}/edit',[PostController::class,'edit'])->name('post.edit');
+
+Route::get('/comments/{comment}/edit',[CommentController::class,'edit'])->name('comment.edit');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

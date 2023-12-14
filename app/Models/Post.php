@@ -17,5 +17,5 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
 
-    protected $fillable = ['post','user_id'];
+    protected $fillable = ['post','user_id','media'];
 }

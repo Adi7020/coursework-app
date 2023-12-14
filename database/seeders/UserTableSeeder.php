@@ -20,6 +20,6 @@ class UserTableSeeder extends Seeder
         $a->password = "adi12345";
         $a->usertype = "admin";
         $a->save();
-        User::factory()->count(5)->create();
+        User::factory()->count(3)->create();
     }
 }
