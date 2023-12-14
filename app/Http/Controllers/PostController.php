@@ -43,10 +43,10 @@ class PostController extends Controller
         $post = new Post();
         $post->user_id = Auth::user()->id;
         $post->post = $request->post;
-         $post->image = $imagePath;
+        $post->image = $imagePath;
         $post->save();
 
-        return redirect()->route('dashboard');
+        return redirect()->back();
 
         
     }
@@ -66,8 +66,12 @@ class PostController extends Controller
     public function edit(string $id)
     {
         //
-        $editing = true;
-        return view('post.edit',compact('posts','editing'));
+        // $editing = true;
+        // return view('post.edit',compact('posts','editing'));
+
+        $post = Post::findOrFail($id);
+        
+        return view('Posts.edit', compact('post'));
     }
 
     /**
@@ -75,7 +79,32 @@ class PostController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $validateData = $request->validate([
+            'post' => 'required|max:250',
+            'image' => 'image|mimes:jpeg,png,jpg,gif,svg', // Adjust file types and size as needed
+        ]);
+
+        $post = Post::findOrFail($id);
+
+        $imagePath = null;
+
+        if($request->hasFile('image')){
+                $imagePath = $request->file('image')->store('images/posts', 'public');
+            }
+        else{
+            $imagePath = null;
+        }
+
+        $post->update([
+            'post' => $request->input('post'),
+            'image' => $imagePath,
+        ]);
+        
+        $posts = Post::all();
+        $posts = Post::orderBy('created_at','DESC')->paginate(5);
+        return view('Posts.index',['posts'=>$posts]);
+
+        
     }
 
     /**

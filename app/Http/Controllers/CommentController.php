@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -10,12 +11,21 @@ class CommentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
-    {
-        //
-        $comments = Comment::all();
-        return view('Comments.index',['comments' => $comments]);
-    }
+    // public function index()
+    // {
+    //     //
+    //     $posts = Post::all();
+    //     $comments = Comment::all();
+    //     return view('Comments.index',['comments' => $comments,'posts'=> $posts]);
+    // }
+    // CommentController.php
+
+public function index($postId)
+{
+    $post = Post::with('comments.user.tags')->findOrFail($postId);
+    return view('Comments.index', ['post' => $post]);
+}
+
 
     /**
      * Show the form for creating a new resource.
@@ -47,6 +57,9 @@ class CommentController extends Controller
     public function edit(string $id)
     {
         //
+        $comment = Comment::findOrFail($id);
+        
+        return view('Comments.edit', compact('comment'));
     }
 
     /**
@@ -55,6 +68,17 @@ class CommentController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $validateData = $request->validate([
+            'comment' => 'required|max:250',
+        ]);
+        $comment = Comment::findOrFail($id);
+
+        $comment->update([
+            'comment'=> request()->input('comment')
+        ]);
+
+        $comments = Comment::all();
+        return view('Comments.index',['comments' => $comments]);
     }
 
     /**

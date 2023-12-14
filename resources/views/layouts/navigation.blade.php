@@ -21,11 +21,11 @@
                         {{ __('Post') }}
                     </x-nav-link>
                 </div>
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <!--<div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('comment.index',Auth::user()->id)" :active="request()->routeIs('comment.index')">
                         {{ __('Comment') }}
                     </x-nav-link>
-                </div>
+                </div>-->
                 
             </div>
 

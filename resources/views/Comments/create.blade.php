@@ -1,5 +1,5 @@
-<div class="bg-gray-600 dark:bg-gray-600 overflow-hidden shadow-sm sm:rounded-lg w-3/5 m-4 ">
-    <form class="max-w-2xl bg-gray-600 rounded-lg p-2 mx-auto m-4" action="{{route('comment.create')}}" method="post"  >
+<div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid justify-items-center ">
+    <form class="w-3/5 max-w-2xl bg-gray-600 rounded-lg p-2 mx-auto m-4" method="post">
         @csrf
         <div class="px-3 mb-2 mt-2">
             <textarea placeholder="Comment"

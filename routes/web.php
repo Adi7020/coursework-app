@@ -23,7 +23,8 @@ Route::get('/', function () {
 
 Route::get('/posts/{post}',[PostController::class,'index'])->name('post.index');
 
-Route::get('/comments/{comment}',[CommentController::class,'index'])->name('comment.index');
+Route::get('/comment/{id}', [CommentController::class,'index'])->name('comment.index');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -32,11 +33,17 @@ Route::get('/dashboard', function () {
 // Route::post('/posts',[PostController::class,'store'])->name('post.create');
 Route::post('/posts',[PostController::class,'store'])->name('post.store');
 
+Route::post('/comments',[CommentController::class,'store'])->name('comment.store');
+
 Route::get('/posts/{post}/comments',[CommentController::class,'index'])->name('post.comment.create');
 
-Route::get('/posts/{post}/edit',[PostController::class,'edit'])->name('post.edit');
+Route::get('/posts/{id}/edit',[PostController::class,'edit'])->name('posts.edit');
 
-Route::get('/comments/{comment}/edit',[CommentController::class,'edit'])->name('comment.edit');
+Route::put('/posts/{id}', [PostController::class, 'update'])->name('posts.update');
+
+Route::get('/comments/{comment}/edit',[CommentController::class,'edit'])->name('comments.edit');
+
+Route::put('/comments/{id}', [CommentController::class, 'update'])->name('comments.update');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
