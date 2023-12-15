@@ -9,7 +9,7 @@
         
                 <div class="col-md-6">
                 <h1 class="align-center text-white">Posts</h1>
-                    <div class=" bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                    
                                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                         @foreach ($posts as $post)
                             <div class="m-1 p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -17,11 +17,11 @@
                             </div>
                         @endforeach
                     </div>
-                    </div>
+                    
                 </div>
 
-                <div class="col-md-6">
-                <h1>Comments</h1>
+                <div class="col-md-6 mt-5">
+                <h1 class="text-white">Comments</h1>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                         @foreach ($comments as $comment)
                             <div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">

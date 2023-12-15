@@ -5,6 +5,17 @@
         </h2>
     </x-slot>
     <div class="py-12">
+    <h1>Create Post</h1>
+ 
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 grid justify-items-center">
             <form class=" w-3/5 max-w-2xl bg-gray-600 rounded-lg p-2 mx-auto m-4" action="{{ route('posts.update', ['id' => $post->id]) }}" method="post" enctype="multipart/form-data" >
         @csrf
