@@ -1,9 +1,9 @@
 <?php
 
 use App\Http\Controllers\CommentController;
-use App\Http\Controllers\NewPostController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,15 +25,14 @@ Route::get('/posts/{post}',[PostController::class,'index'])->name('post.index');
 
 Route::get('/comments/{id}', [CommentController::class,'index'])->name('comment.index');
 
+Route::get('/users/{id}',[UserController::class,'index'])->name('user.index');
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-// Route::post('/posts',[PostController::class,'store'])->name('post.create');
 Route::post('/posts',[PostController::class,'store'])->name('post.store');
-
-// Route::post('/posts/{post}/comments',[CommentController::class,'index'])->name('post.comment.create');
 
 Route::match(['get', 'post'], '/comments/{id}', [CommentController::class, 'index'])->name('comment.index');
 
@@ -43,7 +42,6 @@ Route::put('/posts/{id}', [PostController::class, 'update'])->name('posts.update
 
 Route::get('/comments/{comment}/edit',[CommentController::class,'edit'])->name('comments.edit');
 
-// Route::put('/comments/{id}', [CommentController::class, 'update'])->name('comments.update');
 
 Route::post('/comments',[CommentController::class,'store'])->name('comments.store');
 

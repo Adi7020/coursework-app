@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -9,9 +11,12 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id)
     {
         //
+        $posts = Post::where('user_id',$id)->get();
+        $comments = Comment::where('user_id',$id)->get();
+        return view("Users.index", compact("posts","comments"));
     }
 
     /**
