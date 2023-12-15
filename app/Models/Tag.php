@@ -12,4 +12,14 @@ class Tag extends Model
     public function user(){
         return $this->belongsTo(User::class);
     }
+
+    public function posts()
+    {
+        return $this->morphedByMany(Post::class, 'taggable');
+    }
+
+    public function comments()
+    {
+        return $this->morphedByMany(Comment::class, 'taggable');
+    }
 }

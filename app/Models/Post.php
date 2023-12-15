@@ -17,5 +17,10 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
 
+    public function tags()
+    {
+        return $this->morphToMany(Tag::class, 'taggable');
+    }
+
     protected $fillable = ['post','user_id','media'];
 }
