@@ -20,7 +20,7 @@
                         {{$post->user->name}}
                     </div>
                     <div class="col-md-7">
-                        {{$post->user->tags->nametag}}
+                        <a href="{{route('user.index',['id' =>$post->user->id])}}">{{$post->user->tags->nametag}}</a> 
                     </div>
                     
                 </div>
@@ -62,7 +62,7 @@
                                     {{ $comment->user->name }}
                                 </div>
                                 <div class="col-md-8">
-                                    {{ $comment->user->tags->nametag }}
+                                    <a href="{{route('user.index',['id' =>$post->user->id])}}">{{$post->user->tags->nametag}}</a>
                                 </div>
                                 <div class="col">
                                   
@@ -98,7 +98,7 @@
                         {{$post->user->name}}
                     </div>
                     <div class="col-md-7">
-                        {{$post->user->tags->nametag}}
+                        <a href="{{route('user.index',['id' =>$post->user->id])}}">{{$post->user->tags->nametag}}</a> 
                     </div>
                     
                 </div>
