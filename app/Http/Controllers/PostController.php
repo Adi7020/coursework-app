@@ -16,8 +16,8 @@ class PostController extends Controller
         //
         $posts = Post::all();
         $posts = Post::orderBy('created_at','DESC')->paginate(5);
-        
-        
+
+
         return view('Posts.index',['posts'=>$posts]);
     }
 
@@ -36,7 +36,7 @@ class PostController extends Controller
     {
         $request->validate([
             'post' =>'required',
-            'image'=>'required|image|mimes:png,jpg,png,gif,svg',
+            'image'=>'image|mimes:png,jpg,png,gif,svg',
         ]);
 
         $post = new Post();
@@ -53,7 +53,7 @@ class PostController extends Controller
 
         return redirect()->back();
 
-        
+
     }
 
     /**
@@ -62,7 +62,7 @@ class PostController extends Controller
     public function show(string $id)
     {
         //
-        
+
     }
 
     /**
@@ -75,7 +75,7 @@ class PostController extends Controller
         // return view('post.edit',compact('posts','editing'));
 
         $post = Post::findOrFail($id);
-        
+
         return view('Posts.edit', compact('post'));
     }
 
@@ -104,12 +104,12 @@ class PostController extends Controller
             'post' => $request->input('post'),
             'image' => $imagePath,
         ]);
-        
+
         $posts = Post::all();
         $posts = Post::orderBy('created_at','DESC')->paginate(5);
         return view('Posts.index',['posts'=>$posts]);
 
-        
+
     }
 
     /**
